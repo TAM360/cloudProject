@@ -21,9 +21,11 @@
       <p class="navbar-item">
         <b><%= link_to 'Home', root_path %></b>
       </p>
-
-      
-      
+      <p class="navbar-item">
+        <% if user_signed_in? %>
+         <b><%= link_to 'Profile Edit', edit_user_registration_path %></b>
+      <% end %>
+      </p>
     </div>
     </div>
 
