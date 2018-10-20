@@ -29,12 +29,17 @@
 
     <div class="navbar-end">
       <div class="navbar-item">
+    
         <p class="navbar-item">
-        <b><%= link_to 'Sign Up', controller: 'users/registrations', action: 'index' %></b>
-        </p>
-        <p class="navbar-item">
-        <b><%= link_to 'Login', controller: 'users/sessions', action: 'index' %></b>
-        </p>
+        <% if user_signed_in? %>
+          <b><%= link_to 'Log Out',destroy_user_session_path, method: :delete %></b>
+        <% else %>
+          <p class="navbar-item">
+            <b><%= link_to 'Sign Up', new_user_registration_path %></b>
+          </p>
+          <b><%= link_to 'Login', new_user_session_path %></b>
+        <% end %>
+        </p> 
     </div>
   </div>
 </nav>
