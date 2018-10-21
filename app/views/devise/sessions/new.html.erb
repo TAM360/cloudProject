@@ -7,6 +7,7 @@
             background: #7FFF00
         }
     </style>
+    <%= csrf_meta_tags %>
 </head>
 <body>
     <%= render partial: 'layouts/navbar' %>
@@ -20,7 +21,6 @@
                         <p class="subtitle has-text-grey">Sign In </p>
                         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                         
-                        <%= csrf_meta_tag %>
                         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
                         
                         <div class="field">
