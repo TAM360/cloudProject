@@ -19,6 +19,10 @@
                         <h3 class="title has-text-grey">
                         <p class="subtitle has-text-grey">Sign In </p>
                         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                        
+                        <%= csrf_meta_tag %>
+                        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
+                        
                         <div class="field">
                           <%= f.label :email %><br />
                           <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -39,9 +43,23 @@
                         <div class="actions">
                           <%= f.submit "Log in" %>
                         </div>
-                      <% end %>
+                        <h3>Or</h3>
+                        <!---->
+                        <%= google_sign_in_button 'Sign in with my Google account', proceed_to: create_login_url %>
+                      <% unless current_user %> 
 
-                      <%= render "devise/shared/links" %>
+                        <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
+
+                        <% else %>
+
+                        <%= current_user[:name] %>
+
+                        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+
+                        <% end %>
+                      <% end %>
+                        
+                      <!--<%= render "devise/shared/links" %>-->
                     </div>
                 </div>
             </div>
