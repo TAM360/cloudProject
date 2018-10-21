@@ -15,10 +15,16 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
-
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'twitter'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
-
+# Use gmail for for 3rd party sign up
+gem 'google_sign_in'
+# use figaro for setting up ENV variables
+gem 'figaro'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
