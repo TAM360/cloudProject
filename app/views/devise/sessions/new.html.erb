@@ -33,30 +33,34 @@
                           <%= f.password_field :password, autocomplete: "current-password" %>
                         </div>
 
-                        <% if devise_mapping.rememberable? -%>
+                        <% if devise_mapping.rememberable? %>
                           <div class="field">
                             <%= f.check_box :remember_me %>
                             <%= f.label :remember_me %>
                           </div>
-                        <% end -%>
+                        <% end %>
 
                         <div class="actions">
                           <%= f.submit "Log in" %>
                         </div>
-                        <h3>Or</h3>
-                        <!---->
-                        <%= google_sign_in_button 'Sign in with my Google account', proceed_to: create_login_url %>
+                        
+                        <!--<%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path %>-->
+                        
+                        <br>
                       <% unless current_user %> 
 
                         <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
 
                         <% else %>
-
-                        <%= current_user[:name] %>
-
-                        <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-
+                            <% if current_user[:name].nil? %>
+                                <%=  current_user[:user_name]%>
+                            <% else %>
+                                <%= current_user[:name] %>
+                            <% end %>
+                            <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+  
                         <% end %>
+                        
                       <% end %>
                         
                       <!--<%= render "devise/shared/links" %>-->
@@ -65,7 +69,6 @@
             </div>
         </div>
     </section>
-    
     <%= render partial: 'layouts/footer' %>
 </body>
 </html>
