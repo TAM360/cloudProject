@@ -1,0 +1,28 @@
+<% unless !current_user %>
+<style>
+        #box {background: #7FFF00}       
+</style>
+<section class="hero  is-fullheight">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <div class="column is-4 is-offset-4">
+                <div class="box" id='box'>
+                    <h3 class="title has-text-grey">
+                        <p class="has-text-grey">Profile Information</p>
+                        
+                            <% if !current_user[:user_name].nil?%>
+                                <p class='subtitle'>Username: &emsp;<%= current_user[:user_name]%></p>
+                            <% end %>
+                            <% if !current_user[:name].nil?%>
+                                <p class='subtitle '>Full Name: &emsp;<%= current_user[:name]%></p>
+                            <% end %>
+                            <p class='subtitle '>Email: &emsp;<%= current_user[:email]%></p>
+                            <p class='subtitle '>City: &emsp;<%= current_user[:city]%></p>
+                            <p class='subtitle '>Country: &emsp;<%= current_user[:country]%></p>
+                       
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+ <% end %>
