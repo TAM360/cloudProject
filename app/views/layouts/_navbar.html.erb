@@ -27,6 +27,16 @@
         <% if user_signed_in? %>
          <b><%= link_to 'Profile Edit', edit_user_registration_path %></b>
       <% end %>
+
+      <p class="navbar-item">
+          <% if user_signed_in? %>
+          <b><%= link_to 'See Your Posts', posts_path %></b>
+      <% end %>
+
+      <p class="navbar-item">
+          <% if user_signed_in? %>
+          <b><%= link_to 'Upload New Post', new_post_path %></b>
+      <% end %>
       </p>
     </div>
     </div>
