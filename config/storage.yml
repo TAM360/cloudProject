@@ -18,7 +18,7 @@ local:
 google:
   service: GCS
   project: trip-journal
-  credentials: <%= ENV['GCS_CREDENTIALS'] %>
+  credentials: <%= Rails.application.credentials.gcs_keys.to_json %>
   bucket: trip-journal-218803.appspot.com
 
 # Use rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
