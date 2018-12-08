@@ -5,11 +5,14 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.where(user_id: current_user.id)
+  end
+
+  def other_posts
+    @posts = Post.where.not(user_id: current_user.id)
   end
 
   # GET /posts/1
-  # GET /posts/1.json
   def show
   end
 
@@ -23,9 +26,9 @@ class PostsController < ApplicationController
   end
 
   # POST /posts
-  # POST /posts.json
   def create
     puts params
+    # redirect_to new_post_url
     @post = Post.new(post_params)
     # @post.picture.attach(params[:post][:picture])
 
@@ -34,14 +37,14 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         # format.json { render :show, status: :created, location: @post }
       else
-        format.html { render :new }
+        format.html { render :new, notice: 'Post not created successfully.' }
         # format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
+
   def update
     respond_to do |format|
       if @post.update(post_params)
@@ -55,7 +58,7 @@ class PostsController < ApplicationController
   end
 
   # DELETE /posts/1
-  # DELETE /posts/1.json
+
   def destroy
     @post.destroy
     respond_to do |format|
@@ -65,6 +68,7 @@ class PostsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
@@ -72,6 +76,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:description, :location, :ratings, :diary_type, :picture)
+      params[:post][:user_id] = current_user.id
+      params.require(:post).permit(:description, :location, :ratings, :diary_type, :user_id, pictures: [])
     end
 end
