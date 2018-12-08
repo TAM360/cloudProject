@@ -22,10 +22,25 @@
        <% if user_signed_in? %>
          <b><%= link_to current_user.user_name, root_path %></b>
        <% end%>
-      </p>
+      
       <p class="navbar-item">
         <% if user_signed_in? %>
          <b><%= link_to 'Profile Edit', edit_user_registration_path %></b>
+      <% end %>
+
+      <p class="navbar-item">
+          <% if user_signed_in? %>
+          <b><%= link_to 'Your Posts', posts_path %></b>
+      <% end %>
+      
+      <p class="navbar-item">
+        <% if user_signed_in? %>
+        <b><%= link_to "Other's Posts", others_posts_path %></b>
+      <% end %>
+
+      <p class="navbar-item">
+          <% if user_signed_in? %>
+          <b><%= link_to 'Upload New Post', new_post_path %></b>
       <% end %>
       </p>
     </div>

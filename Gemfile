@@ -40,6 +40,9 @@ gem 'devise'
 # Use ActiveStorage variant
 gem 'mini_magick', '~> 4.8'
 
+# GCS gem
+gem "google-cloud-storage", "~> 1.8", require: false
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
