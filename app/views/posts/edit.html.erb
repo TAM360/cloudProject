@@ -1,6 +1,31 @@
-<h1>Editing Post</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #box {
+            background: #7FFF00
+        }
+    </style>
+    <%= render partial: 'layouts/head' %> 
+</head>
+<body>
+    <%= render partial: 'layouts/navbar' %>
+        <section class="hero  is-fullheight">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <div class="column is-half is-offset-3">
+                        <div class="box" id = 'box'>
+                            
+                            <h3 class="subtitle has-text-grey">Edit Post</h3>
+                            <%= render 'form', post: @post %>
+                            <%= link_to 'Show', @post %>
+                            <%= link_to 'Back', posts_path %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <%= render partial: 'layouts/footer' %>
+</body>
+</html>
 
-<%= render 'form', post: @post %>
-
-<%= link_to 'Show', @post %> |
-<%= link_to 'Back', posts_path %>
