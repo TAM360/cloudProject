@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :convert_post_id_to_integer, only: [:set_ratings]
 
   # GET /posts
   # GET /posts.json
@@ -67,19 +68,45 @@ class PostsController < ApplicationController
     end
   end
 
+  def set_ratings
+    puts params
+    check = PostRating.where(user_id: params[:user_id], post_id: params[:post_id])
+    @post = Post.find_by(id: params[:post_id])
+
+    if check.present?
+      check.update(rating: params[:rating])
+      redirect_to @post
+    else
+      rating = PostRating.new(append_ratings_params)
+      respond_to do |format|
+        if rating.save 
+          format.html { redirect_to @post, notice: 'Rating Submitted' }
+        else
+          format.html { redirect_to @post, notice: 'Rating Not Submitted' }
+        end
+      end
+    end 
+  end
+
   private
 
     # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params[:post][:user_id] = current_user.id
-      params.require(:post).permit(:description, :location, :ratings, :diary_type, :user_id, pictures: [])
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params[:post][:user_id] = current_user.id
+    params.require(:post).permit(:description, :location, :ratings, :diary_type, :user_id, pictures: [])
+  end
 
-    def show_location 
-    end
+  def convert_post_id_to_integer 
+    params[:user_id] = current_user.id
+    params[:post_id] = params[:post_id].to_i
+  end
+
+  def append_ratings_params 
+    params.permit(:user_id, :rating, :post_id)
+  end
 end
