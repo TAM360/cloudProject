@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+  # has_many :wish_list, class_name: "wish_list"
 
   def self.new_with_session(params, session)
     super.tap do |user|

@@ -1,0 +1,35 @@
+<h1>Editing Wish List</h1>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #box {
+            background: #7FFF00
+        }
+    </style>
+    <%= render partial: 'layouts/head' %> 
+</head>
+<body>
+    <%= render partial: 'layouts/navbar' %>
+        <section class="hero  is-fullheight">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <div class="column is-half is-offset-3">
+                        <div class="box" id = 'box'>
+                            <h1>Edit Wish List</h1>
+                            <%= render 'form', wish_list: @wish_list %>
+
+                            <%= link_to 'Show', @wish_list %>
+                            <%= link_to 'Back', wish_lists_path %>                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <%= render partial: 'layouts/footer' %>
+</body>
+</html>
