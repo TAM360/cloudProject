@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%= render partial: 'layouts/head' %>
+    <style>
+      h1 {
+        text-align: center;
+      }
+    </style>
+</head>
+<body>
+    <%= render partial: 'layouts/navbar' %>
+       <div class="box">
+         <div class="columns">
+           <div class="column is-one-third"></div>
+              <div class="column is-one-third">
+                  <h1 class="is-large">Wish List</h1>
+                  
+                  <% @wish_lists.each do |wish_list| %>
+                    <div class="card">
+                      <div class="card-content">
+                        <%= wish_list.user_id %>
+                        <%= wish_list.location_name %>
+                      </div>
+                      <footer class="card-footer">
+                        <%= link_to 'Edit Item', edit_wish_list_path(wish_list), class: 'card-footer-item' %>
+                        <%= link_to 'Delete Item', wish_list, class: 'card-footer-item', method: :delete, data: { confirm: 'Are you sure?' } %>
+                        <%= link_to 'Show', wish_list, class: 'card-footer-item' %>
+                      </footer>
+                    </div>
+                  <% end %>
+              </div>
+           </div>
+           <div class="column is-one-third"></div>
+         </div>
+       </div>
+    <%= render partial: 'layouts/footer' %>
+</body>
+</html>
