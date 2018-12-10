@@ -1,36 +1,35 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Posts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Location</th>
-      <th>Ratings</th>
-      <th>Diary type</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.description %></td>
-        <td><%= post.location %></td>
-        <td><%= post.ratings %></td>
-        <td><%= post.diary_type %></td>
-        <%= post.pictures.each do |picture| %>
-                <%= image_tag(picture, width: 400) %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%= render partial: 'layouts/head' %>
+  <style>
+    .box {
+      padding-top: 5px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 30px;
+      padding-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+    <%= render partial: 'layouts/navbar' %>
+  <div>
+      <div class="box">
+      <h1 class="title">Others' Posts </h1>
+          <% @posts.each do |post| %>
+            <div class="columns">
+              <div class="column"></div>
+              <div class="column">
+                <%= render partial: 'layouts/image-grid', locals: {post: post} %>
+              </div>
+              <div class="column"></div>
+          </div>
         <% end %>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+      </div>
+  </div>
+  <br>
+  <%= render partial: 'layouts/footer' %>
+</body>
+</html>

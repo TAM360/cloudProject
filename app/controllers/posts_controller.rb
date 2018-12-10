@@ -79,4 +79,7 @@ class PostsController < ApplicationController
       params[:post][:user_id] = current_user.id
       params.require(:post).permit(:description, :location, :ratings, :diary_type, :user_id, pictures: [])
     end
+
+    def show_location 
+    end
 end

@@ -1,0 +1,28 @@
+<div class= "card">
+    <%= post.pictures.each do |picture| %>
+        <div class="column">
+        <div class="card-image">
+            <figure class="image is-2by1">
+            <!--<img src="<%= url_for(picture) %>%" alt="post picture">-->
+                <%= image_tag picture %> 
+            </figure>
+        </div>
+        </div>
+    <% end %>          
+    <div class="card-content">
+        <p class="is-medium"><strong>Description: </strong> <%= post.description %> </p>  
+        <p class="is-medium"><strong>Location:</strong> <%= post.location %> </p>  
+        <p class="is-medium"><strong>Ratings:</strong> 
+            <%# post.ratings %>
+        </p> 
+        <p><strong>Diary Type:</strong> <%= post.diary_type %> </p> 
+        
+    </div>
+    <footer class="card-footer">
+        <%= link_to 'Show Post', post, class: 'card-footer-item' %>
+        <% if current_user.id == post.user_id %>
+            <%= link_to 'Edit Post', edit_post_path(post), class: 'card-footer-item' %>
+            <%= link_to 'Delete Post', post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-footer-item' %>
+        <% end %>
+    </footer>
+</div>
